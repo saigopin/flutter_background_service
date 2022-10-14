@@ -151,6 +151,8 @@ public class BackgroundService extends Service implements MethodChannel.MethodCa
 
         methodChannel = null;
         dartEntrypoint = null;
+        stopForeground(true);
+        stopSelf();
         super.onDestroy();
     }
 
@@ -262,9 +264,12 @@ public class BackgroundService extends Service implements MethodChannel.MethodCa
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        if (isRunning.get()) {
-            WatchdogReceiver.enqueue(getApplicationContext(), 1000);
-        }
+        // if (isRunning.get()) {
+        //     WatchdogReceiver.enqueue(getApplicationContext(), 1000);
+        // }
+        System.out.println("onTaskRemoved called");
+        super.onTaskRemoved(rootIntent);
+        this.stopSelf();
     }
 
     @Override
