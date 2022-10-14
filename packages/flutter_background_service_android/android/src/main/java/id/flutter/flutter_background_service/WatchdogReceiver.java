@@ -15,7 +15,8 @@ import androidx.core.content.ContextCompat;
 
 public class WatchdogReceiver extends BroadcastReceiver {
     private static final int QUEUE_REQUEST_ID = 111;
-    private static final String ACTION_RESPAWN = "id.flutter.background_service.RESPAWN";
+    private static final String ACTION_RESPAWN = "id.flutter.background_service.RESPAWN";.
+    private static final String TAG = "WatchdogReceiver";
 
     public static void enqueue(Context context) {
         enqueue(context, 5000);
@@ -64,8 +65,8 @@ public class WatchdogReceiver extends BroadcastReceiver {
                 }
             }
         }
-        }catch(e){
-        
+        }catch(Exception e){
+         Log.e(TAG,"onReceive execpetion");
         }
        
     }
