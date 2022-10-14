@@ -53,7 +53,8 @@ public class WatchdogReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals(ACTION_RESPAWN)){
+        try{
+ if (intent.getAction().equals(ACTION_RESPAWN)){
             final Config config = new Config(context);
             if (!config.isManuallyStopped()) {
                 if (config.isForeground()) {
@@ -63,5 +64,9 @@ public class WatchdogReceiver extends BroadcastReceiver {
                 }
             }
         }
+        }catch(e){
+        
+        }
+       
     }
 }
