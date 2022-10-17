@@ -151,8 +151,6 @@ public class BackgroundService extends Service implements MethodChannel.MethodCa
 
         methodChannel = null;
         dartEntrypoint = null;
-        stopForeground(true);
-        stopSelf();
         super.onDestroy();
     }
 
