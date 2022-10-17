@@ -54,25 +54,20 @@ public class WatchdogReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-         try{
-  if (intent.getAction().equals(ACTION_RESPAWN)){
+        try{
+            if (intent.getAction().equals(ACTION_RESPAWN)){
              final Config config = new Config(context);
-            //  if (!config.isManuallyStopped()) {
-            //      if (config.isForeground()) {
-            //          ContextCompat.startForegroundService(context, new Intent(context, BackgroundService.class));
-            //      } else {
-            //          context.startService(new Intent(context, BackgroundService.class));
-            //      }
-            //  }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                context.startForegroundService(context, new Intent(context, BackgroundService.class))
-            } else {
-                context.startService(new Intent(context, BackgroundService.class))
+             if (!config.isManuallyStopped()) {
+                 if (config.isForeground()) {
+                     ContextCompat.startForegroundService(context, new Intent(context, BackgroundService.class));
+                 } else {
+                     context.startService(new Intent(context, BackgroundService.class));
+                 }
+             }
             }
-         }
-         }catch(Exception e){
+        }catch(Exception e){
           Log.e(TAG,"onReceive execpetion");
-         }
+        }
        
     }
 }
