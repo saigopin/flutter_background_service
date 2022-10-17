@@ -57,13 +57,18 @@ public class WatchdogReceiver extends BroadcastReceiver {
          try{
   if (intent.getAction().equals(ACTION_RESPAWN)){
              final Config config = new Config(context);
-             if (!config.isManuallyStopped()) {
-                 if (config.isForeground()) {
-                     ContextCompat.startForegroundService(context, new Intent(context, BackgroundService.class));
-                 } else {
-                     context.startService(new Intent(context, BackgroundService.class));
-                 }
-             }
+            //  if (!config.isManuallyStopped()) {
+            //      if (config.isForeground()) {
+            //          ContextCompat.startForegroundService(context, new Intent(context, BackgroundService.class));
+            //      } else {
+            //          context.startService(new Intent(context, BackgroundService.class));
+            //      }
+            //  }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(context, new Intent(context, BackgroundService.class))
+            } else {
+                context.startService(new Intent(context, BackgroundService.class))
+            }
          }
          }catch(Exception e){
           Log.e(TAG,"onReceive execpetion");
